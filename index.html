@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flex Box Technical Documentation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+</head>
+<body class="wrapper">
+    <nav class="navigationBar" id="navbar">
+        <header class="navHeader">Controlling Ratios of Flex Items Along the Main Axis</header>
+        <ul class="mainNav">
+          <li class="navbarSection"><a class="nav-link" href="#Important_concepts">Important concepts</a></li>
+          <li class="navbarSection"><a class="nav-link" href="#Flex_basis">Flex basis</a></li>
+          <li class="navbarSection"><a class="nav-link" href="#Flex_grow">Flex grow</a></li>
+          <li class="navbarSection"><a class="nav-link" href="#Flex_shrink">Flex shrink</a></li>
+          <li class="navbarSection"><a class="nav-link" href="#Mastering_sizing">Mastering sizing</a></li>
+        </ul>
+    </nav>
+    <main class="content" id="main-doc">
+        <section class="main-section" id="Important_concepts">
+            <header>Important concepts</header>
+            <p>There are a few concepts worth digging into before looking at how the flex properties work to control ratios along the main axis. These relate to the natural size of flex items before any growing or shrinking takes place, and to the concept of free space.</p>
+         </section>
+         <section class="main-section" id="Flex_basis">
+            <header>Flex basis</header>
+            <p>The flex-basis property specifies the initial size of the flex item before any space distribution happens. The initial value for this property is auto. If flex-basis is set to auto then to work out the initial size of the item the browser first checks if the main size of the item has an absolute size set. This would be the case if you had given your item a width of 200 pixels. In that case 200px would be the flex-basis for this item.
+                    If your item is instead auto-sized, then auto resolves to the size of its content. At this point your knowledge of min- and max-content sizing becomes useful, as flexbox will take the max-content size of the item as the flex-basis. The following live example can help to demonstrate this.</p>
+         </section>
+         <section class="main-section" id="Flex_grow">
+            <header>Flex grow</header>
+            <p>The flex-grow property specifies the flex grow factor, which determines how much the flex item will grow relative to the rest of the flex items in the flex container when the positive free space is distributed.</p>
+            <p>Things can get confusing in terms of how flex-grow and flex-basis interact. Let's consider the case of three flex items of differing content lengths and the following flex rules applied to them:</p>
+            <code>flex: 1 1 auto;</code>
+            <code>flex: 1 1 0;</code>
+            <p>In this case the flex-basis value is auto and the items don’t have a width set, and so are auto-sized. This means that flexbox is looking at the max-content size of the items. After laying the items out we have some positive free space in the flex container, shown in this image as the hatched area:</p>
+            <code>.box {display: flex;} <br>.box > * {<br>flex: 1 1 0;<br>}</code>
+        </section>
+         <section class="main-section" id="Flex_shrink">
+            <header>Flex shrink</header>
+            <p>The flex-shrink property specifies the flex shrink factor, which determines how much the flex item will shrink relative to the rest of the flex items in the flex container when negative free space is distributed.</p>
+            <code>.box {<br>width: 500px;<br>display: flex;<br>}</code>
+            <p>This property deals with situations where the browser calculates the flex-basis values of the flex items, and finds that they are too large to fit into the flex container. As long as flex-shrink has a positive value the items will shrink in order that they do not overflow the container.</p>
+            <code>.box > * {<br>flex: 1 1 auto;<br>}</code>
+         </section>
+         <section class="main-section" id="Mastering_sizing">
+            <header>Mastering sizing of flex items</header>
+            <p>The key to really understanding how flex item sizing works is in understanding the number of things that come into play. Consider the following aspects, which we have already discussed in these guides:</p>
+            <p>If you do not want space added to the items, remember that you can deal with free space between or around items using the alignment properties described in the guide to aligning items in a flex container. The justify-content property will enable the distribution of free space between or around items. You can also use auto margins on flex items to absorb space and create gaps between items.</p>
+            <ul>
+                   <li>Is flex-basis set to auto, and does the item have a width set? If so, the size will be based on that width.</li>
+                   <li>Is flex-basis set to auto or content (in a supporting browser)? If so, the size is based on the item size.</li>
+                   <li>Is flex-basis a length unit, but not zero? If so this is the size of the item.</li>
+                   <li>Is flex-basis set to 0? if so then the item size is not taken into consideration for the space-sharing calculation.</li>
+                   <li>bla bla bla</li>
+            </ul>
+            <p>With all the flex tools at your disposal you will find that most tasks can be achieved, although it might take a little bit of experimentation at first.</p>
+         </section>
+    </main>
+</body>
+</html>
